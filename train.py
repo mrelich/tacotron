@@ -18,7 +18,7 @@ from modules import *
 from networks import encode, decode1, decode2
 import numpy as np
 #from prepro import *
-from prepro_phoneme import *
+from prepro_phonemes import *
 #from prepro import load_vocab
 import tensorflow as tf
 from utils import shift_by_one

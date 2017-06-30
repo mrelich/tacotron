@@ -26,8 +26,9 @@ def load_vocab():
         ph_list.append(line.split('\n')[0])
     infile.close()
 
-    char2idx = {char:idx for idx, char in enumerate(ph_list)}
-    idx2char = {idx:char for idx, char in enumerate(ph_list)}
+    # +1 for masking
+    char2idx = {char:idx+1 for idx, char in enumerate(ph_list)}
+    idx2char = {idx+1:char for idx, char in enumerate(ph_list)}
     return char2idx, idx2char    
 
 def create_train_data():
