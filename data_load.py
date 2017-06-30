@@ -12,7 +12,8 @@ from tensorflow.python.platform import tf_logging as logging
 
 from hyperparams import Hyperparams as hp
 import numpy as np
-from prepro import *
+#from prepro import *
+from prepro_phonemes import *
 import tensorflow as tf
 from utils import *
 

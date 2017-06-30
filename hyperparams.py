@@ -8,10 +8,12 @@ https://www.github.com/kyubyong/tacotron
 class Hyperparams:
     '''Hyper parameters'''
     # mode
-    sanity_check = True
+    sanity_check = False
     
     # data
-    text_file = 'WEB/text.csv'
+    #text_file = 'WEB/text.csv'
+    text_file = 'WEB/text_ph.csv'
+    ph_file   = 'WEB/phonemes.txt'
     sound_fpath = 'WEB'
     max_len = 100 if not sanity_check else 30 # maximum length of text
     min_len = 10 if not sanity_check else 20 # minimum length of text
@@ -33,7 +35,7 @@ class Hyperparams:
     encoder_num_banks = 16
     decoder_num_banks = 8
     num_highwaynet_blocks = 4
-    r = 5 # Reduction factor. Paper => 2, 3, 5
+    r = 2 # Reduction factor. Paper => 2, 3, 5
     norm_type = 'ins'  # a normalizer function. value: bn, ln, ins, or None
     
     # training scheme
@@ -48,5 +50,5 @@ class Hyperparams:
     # etc
     num_gpus = 1 # If you have multiple gpus, adjust this option, and increase the batch size
                  # and run `train_multiple_gpus.py` instead of `train.py`.
-    target_zeros_masking = False # If True, we mask zero padding on the target, 
+    target_zeros_masking = True  # If True, we mask zero padding on the target, 
                                  # so exclude them from the loss calculation.     

@@ -16,9 +16,18 @@ import numpy as np
 
 
 def load_vocab():
-    vocab = "EG abcdefghijklmnopqrstuvwxyz" # E: Empty. ignore G
-    char2idx = {char:idx for idx, char in enumerate(vocab)}
-    idx2char = {idx:char for idx, char in enumerate(vocab)}
+
+    # Read infile
+    # TODO: make this entire thing a class to
+    #       handle data prep
+    infile = open(hp.ph_file,'r')
+    ph_list = []
+    for line in infile:
+        ph_list.append(line.split('\n')[0])
+    infile.close()
+
+    char2idx = {char:idx for idx, char in enumerate(ph_list)}
+    idx2char = {idx:char for idx, char in enumerate(ph_list)}
     return char2idx, idx2char    
 
 def create_train_data():
@@ -30,10 +39,11 @@ def create_train_data():
     for row in reader:
         sound_fname, text, duration = row
         sound_file = hp.sound_fpath + "/" + sound_fname + ".wav"
-        text = re.sub(r"[^ a-z]", "", text.strip().lower())
          
         if hp.min_len <= len(text) <= hp.max_len:
-            texts.append(np.array([char2idx[char] for char in text], np.int32).tostring())
+            # Ignoring whitespace.  I don't know if the white space will matter
+            # in the case of phonemes...
+            texts.append(np.array([char2idx[char] for char in text.split()], np.int32).tostring())
             sound_files.append(sound_file)
              
     return texts, sound_files

@@ -9,7 +9,8 @@ from __future__ import print_function
 
 from hyperparams import Hyperparams as hp
 from modules import *
-from prepro import load_vocab
+#from prepro import load_vocab
+from prepro_phonemes import load_vocab
 import tensorflow as tf
 
 

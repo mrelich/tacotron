@@ -16,7 +16,8 @@ from scipy.io.wavfile import write
 
 from hyperparams import Hyperparams as hp
 import numpy as np
-from prepro import *
+#from prepro import *
+from prepro_phonemes import *
 import tensorflow as tf
 from train import Graph
 from utils import *
