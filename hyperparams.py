@@ -15,8 +15,10 @@ class Hyperparams:
     text_file = 'WEB/text_ph.csv'
     ph_file   = 'WEB/phonemes.txt'
     sound_fpath = 'WEB'
-    max_len = 100 if not sanity_check else 30 # maximum length of text
-    min_len = 10 if not sanity_check else 20 # minimum length of text
+    #max_len = 100 if not sanity_check else 30 # maximum length of text
+    #min_len = 10 if not sanity_check else 20 # minimum length of text
+    max_len = 350 # phonemes extend the length 
+    min_len = 75  # so adjust accordingly
     
     # signal processing
     sr = 22050 # Sampling rate. Paper => 24000
