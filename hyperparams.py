@@ -8,7 +8,7 @@ https://www.github.com/kyubyong/tacotron
 class Hyperparams:
     '''Hyper parameters'''
     # mode
-    sanity_check = False
+    sanity_check = True
     
     # data
     #text_file = 'WEB/text.csv'
@@ -19,8 +19,10 @@ class Hyperparams:
     #min_len = 10 if not sanity_check else 20 # minimum length of text
     #max_len  = 100
     #min_len  = 10
-    max_len = 300 # phonemes extend the length 
-    min_len = 75  # so adjust accordingly
+    #max_len = 300 # phonemes extend the length 
+    #min_len = 75  # so adjust accordingly
+    max_len = 150 # phonemes extend the length 
+    min_len = 50  # so adjust accordingly
     
     # signal processing
     sr = 22050 # Sampling rate. Paper => 24000
@@ -44,8 +46,8 @@ class Hyperparams:
     
     # training scheme
     lr = 0.0005 # Paper => Exponential decay
-    logdir = "logdir" if not sanity_check else "logdir_s"
-    outputdir = 'samples' if not sanity_check else "samples_s"
+    logdir = "logdir" # if not sanity_check else "logdir_s"
+    outputdir = 'samples' # if not sanity_check else "samples_s"
     batch_size = 32
     num_epochs = 2000000 # Let's go for 2 million
     loss_type = "l2" # Or you can test "l2"

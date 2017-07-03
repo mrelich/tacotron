@@ -26,7 +26,7 @@ def load_vocab():
         ph_list.append(line.split('\n')[0])
     infile.close()
 
-    # +1 for masking
+    # removing masking
     char2idx = {char:idx for idx, char in enumerate(ph_list)}
     idx2char = {idx:char for idx, char in enumerate(ph_list)}
     return char2idx, idx2char    
@@ -41,7 +41,7 @@ def create_train_data():
         sound_fname, text, duration = row
         sound_file = hp.sound_fpath + "/" + sound_fname + ".wav"
          
-        if hp.min_len <= len(text) <= hp.max_len:
+        if hp.min_len <= len(text.split()) <= hp.max_len:
             # Ignoring whitespace.  I don't know if the white space will matter
             # in the case of phonemes...
             texts.append(np.array([char2idx[char] for char in text.split()], np.int32).tostring())

@@ -16,11 +16,15 @@ import csv
 import codecs
 import re
 
+# For purpose of training, just take small
+# subset of total results, say 1k
+n_to_keep = 1000
+
 # Specify the input and output file
 # TODO: Make this configurable
 inname  = '../WEB/text.csv'
-outname = '../WEB/text_ph.csv'
-outph   = '../WEB/phonemes.txt'
+outname = '../WEB/text_ph2.csv'
+outph   = '../WEB/phonemes2.txt'
 
 # Setup the W2P model
 # path is unpacked model directory
@@ -32,11 +36,20 @@ conv = W2P('g2p-seq2seq-cmudict')
 ph_list = []
 reader  = csv.reader(codecs.open(inname, 'rb', 'utf-8'))
 outfile = open(outname,'w')
+c = 0
 for row in reader:
     sound_fname, text, duration = row
     text = re.sub(r"[^ a-z]", "", text.strip().lower())
 
-    text_ph = conv.convert_sentence(text)
+    # Loop over words and insert some token to identify
+    # spaces in words
+    text_ph = "" 
+    for word in text.split():
+        text_ph += conv.convert(word) + " _ "
+
+    #text_ph = conv.convert_sentence(text)
+
+    # write ouput
     outfile.write(','.join([sound_fname, text_ph, duration]))
     outfile.write('\n')
     
@@ -45,6 +58,10 @@ for row in reader:
         if ph not in ph_list:
             ph_list.append(ph)
 
+    # Decide if we should break or not
+    if c >= n_to_keep:
+        break
+    c += 1
             
 outfile.close()
 
